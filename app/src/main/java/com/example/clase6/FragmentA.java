@@ -57,7 +57,8 @@ public class FragmentA extends Fragment {
                     mascota.setDni(texto4);
                     mascota.setDescripcion(texto3);
                     lista.add(mascota);
-                    mascotaViewModel.getListaMascotas().postValue(lista);
+                    //Log.d("text", "masc:" + lista.get(3).getMascota());
+                    mascotaViewModel.getListaMascotas().setValue(lista);
                     Context context = requireContext();
                     Toast toast = Toast.makeText(context, "Se registró correctamente", Toast.LENGTH_SHORT);
                     toast.show();
