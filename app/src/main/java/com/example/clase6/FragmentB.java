@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -13,22 +14,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.clase6.databinding.FragmentBBinding;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class FragmentB extends Fragment {
 
     FragmentBBinding binding;
     private GoogleMap map;
+    private GoogleApiClient googleApiClient;
     private CountDownTimer countDownTimer;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -61,20 +64,24 @@ public class FragmentB extends Fragment {
                 tiempo=10;
                 lat = -12.090303;
                 lon = -77.037239;
+
             }else if(valorSpinner.equals("San Isidro")){
                 tiempo=15;
                 lat = -12.102717;
                 lon = -77.037358;
+
             }
             else if(valorSpinner.equals("Magdalena")){
                 tiempo=20;
                 lat = -12.089891;
                 lon = -77.074231;
+
             }
             else if(valorSpinner.equals("Jesús María")){
                 tiempo=25;
                 lat = -12.078455;
                 lon = -77.051310;
+
             }else{}
            if(countDownTimer !=null){
                countDownTimer.cancel();
@@ -87,6 +94,7 @@ public class FragmentB extends Fragment {
                 LatLng destino = new LatLng(finalLat, finalLon);
                 LatLng inicio = new LatLng(-12.084538, -77.031396);
                 googleMap.clear();
+
                 googleMap.addMarker(new MarkerOptions().position(inicio).title("Ambulancia"));
                 googleMap.addMarker(new MarkerOptions().position(destino).title("destino"));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(destino));
@@ -108,6 +116,25 @@ public class FragmentB extends Fragment {
                 public void onFinish() {
                     // Ejecuta algo cuando el cronómetro finalice
                     binding.textView9.setText("00:00");
+                    MascotaViewModel mascotaViewModel = new ViewModelProvider(requireActivity()).get(MascotaViewModel.class);
+                    ArrayList<Mascota> lista = new ArrayList<>();
+                    lista = mascotaViewModel.getListaMascotas().getValue();
+                    String ruta = null;
+                    if(valorSpinner.equals("Lince")){
+
+                        ruta="Lince-Lince";
+                    }else if(valorSpinner.equals("San Isidro")){
+
+                        ruta="San Isidro-Lince";
+                    }
+                    else if(valorSpinner.equals("Magdalena")){
+
+                        ruta="Magdalena-Lince";
+                    }
+                    else if(valorSpinner.equals("Jesús María")){
+                        ruta="Jesus Maria-Lince";
+                    }else{}
+                    lista.get(lista.size()-1).setRuta(String.valueOf(ruta));
                 }
             };
 

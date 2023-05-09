@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         Button button3 = findViewById(R.id.button3);
         button3.setOnClickListener((view)->{
             if (savedInstanceState == null) {
-                //mascotaViewModel.getListaMascotas().setValue(listaMascotas);
+                mascotaViewModel.getListaMascotas().setValue(listaMascotas);
                 getSupportFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
                         .addToBackStack(null)
