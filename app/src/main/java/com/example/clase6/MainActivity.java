@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         Button button3 = findViewById(R.id.button3);
         button3.setOnClickListener((view)->{
             if (savedInstanceState == null) {
-
+                //mascotaViewModel.getListaMascotas().setValue(listaMascotas);
                 getSupportFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
                         .addToBackStack(null)
@@ -89,31 +89,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-/*
-
-        if (savedInstanceState == null) {
-
-            //Bundle bundle = new Bundle();
-            //bundle.putString("nombre", "Jex");
-
-            ArrayList<Estudiante> lista = new ArrayList<>();
-            lista.add(new Estudiante("Jex", false));
-            lista.add(new Estudiante("Niurka", true));
-            lista.add(new Estudiante("Carlos", false));
-            lista.add(new Estudiante("Angelo", false));
-            lista.add(new Estudiante("Diego", false));
-            lista.add(new Estudiante("David", false));
-
-            EstudiantesViewModel viewModel = new ViewModelProvider(this).get(EstudiantesViewModel.class);
-            viewModel.getListaEstudiantes().setValue(lista);
-
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragmentContainerView, FragmentB.class, null)
-                    .commit();
-        }
-
-*/
         binding.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
