@@ -135,6 +135,7 @@ public class FragmentB extends Fragment {
                         ruta="Jesus Maria-Lince";
                     }else{}
                     lista.get(lista.size()-1).setRuta(String.valueOf(ruta));
+                    mascotaViewModel.getListaMascotas().setValue(lista);
                 }
             };
 
